@@ -34,6 +34,7 @@ def stockAlert():
         notificationPayload=data['payLoad']
         stockCheckInterval=data['frequency']
         # Generate a unique ID for the alert
+        print(data)
         alert_id = str(uuid.uuid1())
         # Start a new thread to run sendAlert in the background
         thread = Thread(target=send_alert_background_task, args=(alert_id, SymbolName, stockPrice, stockNotificationType, notificationPayload, stockCheckInterval))
@@ -104,12 +105,12 @@ def sendMail(notificationPayload,SymbolName,MystockPrice,currentPrice):
 #function to handle sms
 def sendSMS(notificationPayload,SymbolName,MystockPrice,currentPrice):
     #your Account SID and Auth Token 
-    account_sid = 'AC0097621915f6378da39162bb2b78e263'
-    auth_token = '97ffeae960d2f5d712cee8fa33620026'
+    account_sid = 'id_here'
+    auth_token = 'auth_token here'
     client = Client(account_sid, auth_token)
     message = client.messages \
         .create(
-            body="The stock price is higher than threshold. Symbol: "+SymbolName+" Threshold Price: "+str(MystockPrice)+" Current Price.",
+            body="The stock price is higher than threshold. Symbol: "+SymbolName+" Threshold Price: "+str(MystockPrice)+" Current Price:"+str(currentPrice),
             from_='+16074007517',
-            to='+9779860999660'
+            to='+9779860817106'
         )
